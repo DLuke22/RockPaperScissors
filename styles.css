@@ -7,7 +7,7 @@ header {
 
 }
 
-.container {
+.top-container {
     display: flex;
     justify-content: center;
     background-color: darkslategrey;
@@ -17,5 +17,37 @@ header {
 .game > h1 {
     font-size: 48px;
     font-weight: bold;
-    
+    display: flex;
+    justify-content: center;
+}
+
+span {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.results {
+    background-color: darkslategrey;
+    color: white;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.running-score {
+    display: flex;
+    justify-content: center;
+}
+
+.second-container {
+    display: flex;
+    justify-content: center;
+    background-color: darkslategrey;
+    color: white;
+}
+
+button {
+    height: 50px;
+    width: 100px;
 }

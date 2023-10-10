@@ -1,10 +1,14 @@
+let playerSelection = "";
 let playerScore = 0;
 let computerScore = 0;
 
-let playerChoice = "";
-let playerSelection = "";
-let computerSymbol = ''; 
-
+const rockButton = document.querySelector('.rock');
+const paperButton = document.querySelector('.paper');
+const scissorsButton = document.querySelector('.scissors');
+const outcomeDiv = document.querySelector('.outcome');
+const runningScore = document.querySelector('.running-score');
+let playerScoreSpan = document.querySelector('.playerScore');
+let computerScoreSpan = document.querySelector('.computerScore');
 
 
 function computerSelection() {
@@ -15,56 +19,85 @@ function computerSelection() {
 
 computerSymbol = (computerSelection());
 
+playerScoreSpan.innerText = playerScore;
+computerScoreSpan.innerText = computerScore;
+
 
 function game(playerSelection, computerSymbol) {
-    
       if (playerSelection === computerSymbol) {
-        console.log("Tie!");
-        return [playerScore, computerScore];
+        const p = document.createElement('p');
+        p.innerText = `You tied! You both picked ${playerSelection}`;
+        outcomeDiv.appendChild(p);
       } 
       else if (playerSelection == 'rock' && computerSymbol == 'paper') {
-        computerScore += 1;
-        console.log("Computer gets a point!");
-        return [playerScore, computerScore];
+        computerScore++;
+        const p = document.createElement('p');
+        p.innerText = `You Lose! ${playerSelection} is beat by ${computerSymbol}`;
+        outcomeDiv.appendChild(p);
+        playerScoreSpan.innerText = playerScore;
+        computerScoreSpan.innerText = computerScore;
       }
       else if (playerSelection == 'rock' && computerSymbol == 'scissors') {
-        playerScore += 1;
-        console.log("Player gets a point");
-        return [playerScore, computerScore];
+        playerScore++;
+        const p = document.createElement('p');
+        p.innerText = `You Win! ${playerSelection} beats ${computerSymbol}`;
+        outcomeDiv.appendChild(p);
+        playerScoreSpan.innerText = playerScore;
+        computerScoreSpan.innerText = computerScore;
       }
       else if (playerSelection == 'paper' && computerSymbol == 'rock') {
-        playerScore += 1;
-        console.log("Player gets a point");
-        return [playerScore, computerScore];
+        playerScore++;
+        const p = document.createElement('p');
+        p.innerText = `You Win! ${playerSelection} beats ${computerSymbol}`;
+        outcomeDiv.appendChild(p);
+        playerScoreSpan.innerText = playerScore;
+        computerScoreSpan.innerText = computerScore;
       }
       else if (playerSelection == 'paper' && computerSymbol == 'scissors') {
-        computerScore += 1;
-        console.log("Computer gets a point");
-        return [playerScore, computerScore];
+        computerScore++;
+        const p = document.createElement('p');
+        p.innerText = `You Lose! ${playerSelection} is beat by ${computerSymbol}`;
+        outcomeDiv.appendChild(p);
+        playerScoreSpan.innerText = playerScore;
+        computerScoreSpan.innerText = computerScore;
       }
       else if (playerSelection == 'scissors' && computerSymbol == 'paper') {
-        playerScore += 1;
-        console.log("Player gets a point");
-        return [playerScore, computerScore];
+        playerScore++;
+        const p = document.createElement('p');
+        p.innerText = `You Win! ${playerSelection} beats ${computerSymbol}`;
+        outcomeDiv.appendChild(p);
+        playerScoreSpan.innerText = playerScore;
+        computerScoreSpan.innerText = computerScore;
       }
       else if (playerSelection == 'scissors' && computerSymbol == 'rock') {
-        computerScore += 1;
-        console.log("Computer gets a point");
-        return [playerScore, computerScore];
-        
+        computerScore++;
+        const p = document.createElement('p');
+        p.innerText = `You Lose! ${playerSelection} is beat by ${computerSymbol}`;
+        outcomeDiv.appendChild(p); 
+        playerScoreSpan.innerText = playerScore;
+        computerScoreSpan.innerText = computerScore;       
       }
-    
+
+}
+
+function checkForWinner(playerScore, computerScore) {
+  if (playerScore === 5){
+    const h2 = document.createElement('h2');
+    h2.classList.add('player-won');
+    h2.innerText = `You won ${playerScore} to ${computerScore}! Great job beating the computer!`;
+    outcomeDiv.append(h2);
+  } else if (computerScore === 5){
+    const h2 = document.createElement('h2');
+    h2.classList.add('computer-won');
+    h2.innerText = `You lost ${playerScore} to ${computerScore}!`;
+    outcomeDiv.append(h2);
+  }
 }
   
 
-let scoreCheck = ""
-
-for (i = 0; i < 5; i++) {
-
-  playerChoice = prompt("Enter Rock, Paper, or Scissors: ");
-  playerSelection = playerChoice.toLowerCase();
+/*let scoreCheck = ""
   computerSymbol = '';
-  console.log(playerSelection);
+
 
   computerSymbol = (computerSelection());
   console.log(computerSymbol);
@@ -72,7 +105,6 @@ for (i = 0; i < 5; i++) {
   console.log(scoreCheck);
   console.log("Score is " + playerScore + ":" + computerScore);
 
-}
 
 
 
@@ -90,3 +122,25 @@ if (scoreCheck[0] > scoreCheck[1]) {
 }
 
 console.log(results);
+*/
+
+rockButton.addEventListener('click', () => { 
+  let computerSymbol = computerSelection();
+  let playerSelection = 'rock';
+  game(playerSelection, computerSymbol);
+  checkForWinner(playerScore, computerScore);
+});
+
+paperButton.addEventListener('click', () => {
+  let computerSymbol = computerSelection();
+  let playerSelection = 'paper';
+  game(playerSelection, computerSymbol);
+  checkForWinner(playerScore, computerScore);
+});
+
+scissorsButton.addEventListener('click', () => {
+  let computerSymbol = computerSelection();
+  let playerSelection = 'scissors';
+  game(playerSelection, computerSymbol);
+  checkForWinner(playerScore, computerScore);
+});
